@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from numpy import trapz
-from scipy import integrate
+import scipy
+from scipy.integrate import trapz
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
@@ -20,6 +20,7 @@ from sksurv.tree import SurvivalTree
 from sksurv.meta import Stacking
 from sksurv.linear_model import CoxPHSurvivalAnalysis
 import pickle
+
 
 def load_data():
     df = pd.read_csv(r'C:\Users\ming\Desktop\python_work\app\dataset_da_2017.csv', encoding='utf-8')
