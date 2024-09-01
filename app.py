@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-import scipy
-from scipy.integrate import trapz
+from numpy import trapz
+from scipy import integrate
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
@@ -21,9 +21,8 @@ from sksurv.meta import Stacking
 from sksurv.linear_model import CoxPHSurvivalAnalysis
 import pickle
 
-
 def load_data():
-    df = pd.read_csv(r'C:\Users\ming\Desktop\python_work\app\dataset_da_2017.csv', encoding='utf-8')
+    df = pd.read_csv(r'dataset_da_2017.csv', encoding='utf-8')
     columns_to_drop = ['Patient ID', 'Year of diagnosis', 'Survival months flag']
     df = df.drop(columns=columns_to_drop)
     df.replace("Unknown", np.nan, inplace=True)
@@ -48,9 +47,9 @@ summary_stage_mapping = {'Localized': 0, 'Regional': 1, 'Distant': 2}
 
 # Function to load the preprocessed data
 def load_preprocessed_data():
-    with open(r'C:\Users\ming\Desktop\python_work\app\x_train_df.pkl', 'rb') as f:
+    with open(r'x_train_df.pkl', 'rb') as f:
         x_train_df = pickle.load(f)
-    with open(r'C:\Users\ming\Desktop\python_work\app\x_test_df.pkl', 'rb') as f:
+    with open(r'x_test_df.pkl', 'rb') as f:
         x_test_df = pickle.load(f)
     return x_train_df, x_test_df
 
@@ -213,19 +212,19 @@ model_choice = st.sidebar.selectbox('Choose Model', options=['Cox Proportional H
 predict_button = st.sidebar.button('Predict')
 
 # Load the models
-with open(r'C:\Users\ming\Desktop\python_work\app\coxph_model.pkl', 'rb') as f:
+with open(r'coxph_model.pkl', 'rb') as f:
     coxph = pickle.load(f)
 
-with open(r'C:\Users\ming\Desktop\python_work\app\rsf_model.pkl', 'rb') as f:
+with open(r'rsf_model.pkl', 'rb') as f:
     rsf = pickle.load(f)
 
-with open(r'C:\Users\ming\Desktop\python_work\app\gbm_model.pkl', 'rb') as f:
+with open(r'gbm_model.pkl', 'rb') as f:
     gbm = pickle.load(f)
 
-with open(r'C:\Users\ming\Desktop\python_work\app\tree_model.pkl', 'rb') as f:
+with open(r'tree_model.pkl', 'rb') as f:
     tree = pickle.load(f)
 
-with open(r'C:\Users\ming\Desktop\python_work\app\stacking_model.pkl', 'rb') as f:
+with open(r'stacking_model.pkl', 'rb') as f:
     stacking_model = pickle.load(f)
 
 # Use the loaded models to predict
